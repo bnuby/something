@@ -10,22 +10,27 @@ using System;
 
 public class linkModule : MonoBehaviour, IDragHandler ,IEndDragHandler {
 
-//    Dictionary<string,string> answer = new []{};
-    // Use this for initialization
     void Start () {
-
+        boxColliderUpdate();
         this.GetComponentInChildren<Image>().sprite = new Sprite();
         this.GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>("test");
-//        answer.Add("question","hi");
-//        print(answer);
 
+
+    }
+
+    void FixedUpdate(){
+        boxColliderUpdate();
+
+    }
+
+    void boxColliderUpdate(){
+        var rect = this.transform.GetComponent<RectTransform>().rect;
+        this.GetComponent<BoxCollider>().size = new Vector3( rect.width, rect.height, 2);
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        //        var size = this.GetComponentInParent<GameObject>()
         Vector3 Pos = LineStartLocation();
-        //        if (this.GetComponentInParent<tag>().CompareTag("QuestionList"))
         RaycastHit hit = new RaycastHit();
         Vector3 Pos2 = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Pos2.z = 10;
@@ -43,7 +48,6 @@ public class linkModule : MonoBehaviour, IDragHandler ,IEndDragHandler {
 
         if ( test && hit.transform.tag == "linkModule" ) {
             this.GetComponent<LineRenderer>().SetPosition(1, LineEndLocation(hit) );
-            print(hit.transform.GetComponent<Transform>().position.y);
         }
         else
         {
@@ -119,7 +123,6 @@ public class linkModule : MonoBehaviour, IDragHandler ,IEndDragHandler {
             var DragObjectPosX = target.transform.position.x - target.transform.GetComponent<RectTransform>().rect.width / 2 + 10;
             var DragObjectPosY = target.transform.position.y ;
             var DragObjectPosZ = target.transform.position.z ;
-            print("here");
             return Camera.main.ScreenToWorldPoint(new Vector3(DragObjectPosX, DragObjectPosY, 10));
         }
         return new Vector3(0,0,0);

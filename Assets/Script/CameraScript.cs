@@ -3,18 +3,38 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraScript : MonoBehaviour {
-    public Canvas Target;
+    private Canvas Target;
     private Vector3 positionCamera;
-    public Camera camera;
+
+
 	// Use this for initialization
 	void Start () {
-//        positionCamera = camera.transform.position;
-//        positionCamera = Vector3.Lerp(2.0, 50, 0);
+        
 
 	}
+
+    void FixedUpdate(){
+        try {
+            Target = Canvas.FindObjectOfType<Canvas>();
+            StartCoroutine("CameraCoroutine");
+        } catch {
+            //
+        }
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
+       
 
 	}
+
+    void CameraCoroutine(){
+        if (Target.transform.position != this.transform.position)
+        {
+            this.transform.position = Target.transform.position;
+            this.transform.position -= new Vector3(0, 0, 10);
+            this.transform.GetComponent<Camera>().orthographicSize = Target.transform.position.y;
+        }
+    }
 }

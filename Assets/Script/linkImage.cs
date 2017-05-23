@@ -13,7 +13,7 @@ public class linkImage : MonoBehaviour {
         var a = new ArrayList();
         a.Add(2);
         a.Add(5123);
-        print(a[1]);
+//        print(a[1]);
         var b = new question();
         b.addQuestion("hello","b");
         b.addAnswer("hello","b");
@@ -23,7 +23,7 @@ public class linkImage : MonoBehaviour {
 
         foreach (var i in b.checkAnswer(c))
         {
-            print(i);
+//            print(i);
 
         }
 	}
