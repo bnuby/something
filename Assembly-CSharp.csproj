@@ -48,7 +48,12 @@
   <ItemGroup>
      <Compile Include="Assets\Script\CameraScript.cs" />
      <Compile Include="Assets\Script\CanvasLoad.cs" />
+     <Compile Include="Assets\Script\EmptyCSharpFile.cs" />
+     <Compile Include="Assets\Script\EmptyClass.cs" />
+     <Compile Include="Assets\Script\Main.cs" />
      <Compile Include="Assets\Script\addButton.cs" />
+     <Compile Include="Assets\Script\linkImage.cs" />
+     <Compile Include="Assets\Script\linkModule.cs" />
  <Reference Include="UnityEngine.Analytics">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>

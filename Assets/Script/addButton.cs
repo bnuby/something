@@ -4,8 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class addButton : MonoBehaviour {
-    public Transform TargetCanvas;
-    public Image Object;
+    public Transform TargetParent;
+    public GameObject GridObject;
     public Button yourButton;
 	// Use this for initialization
 	void Start () {
@@ -15,12 +15,12 @@ public class addButton : MonoBehaviour {
 
     void OnPress(){
         Button btn = yourButton.GetComponent<Button>();
-        var a = Instantiate(Object);
-        a.transform.SetParent(TargetCanvas);
+        var a = Instantiate(GridObject);
+        a.transform.SetParent(TargetParent);
 
-        var getPos = TargetCanvas.transform.position;
+        var getPos = TargetParent.transform.position;
 
-        btn.transform.position -= new Vector3(0, 100,0) ;
+        btn.transform.position -= new Vector3(0, 55,0) ;
 
     }
 	
