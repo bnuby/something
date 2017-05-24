@@ -1,21 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.EventSystems;
+﻿using UnityEngine.EventSystems;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEditor;
-using System.Collections.Specialized;
-using UnityEngine.AI;
 using System;
 using LitJson;
 
 public class linkModule : MonoBehaviour, IDragHandler ,IEndDragHandler {
 
-    void Start () {
+    private bool isConnected = false;
+
+  void Start () {
         boxColliderUpdate();
         this.GetComponentInChildren<Image>().sprite = new Sprite();
         this.GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>("test");
-
 //        var Text = this.GetComponentInParent<CanvasLoad>().text;
 //        JsonReader Json = new JsonReader(Text);
 //        JsonData data = JsonMapper.ToObject(Text);
@@ -79,12 +75,19 @@ public class linkModule : MonoBehaviour, IDragHandler ,IEndDragHandler {
         try{
             Physics.Raycast(Pos, out hit);
             test = hit.transform.tag == "linkModule";
+            this.isConnected = true;
+            hit.transform.GetComponent<linkModule>().isConnected = true;
+            this.GetComponentInParent<CanvasLoad>().linkCount += 1;
         }catch{
             test = false;
         }
         if (!test)
         {
             this.GetComponent<LineRenderer>().SetPosition(1, LineStartLocation() );
+            if (this.isConnected)
+            {
+                this.GetComponentInParent<CanvasLoad>().linkCount -= 1;
+            }
         }
 
     }
