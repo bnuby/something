@@ -7,6 +7,7 @@ using UnityEditor;
 using System.Collections.Specialized;
 using UnityEngine.AI;
 using System;
+using LitJson;
 
 public class linkModule : MonoBehaviour, IDragHandler ,IEndDragHandler {
 
@@ -14,6 +15,12 @@ public class linkModule : MonoBehaviour, IDragHandler ,IEndDragHandler {
         boxColliderUpdate();
         this.GetComponentInChildren<Image>().sprite = new Sprite();
         this.GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>("test");
+
+//        var Text = this.GetComponentInParent<CanvasLoad>().text;
+//        JsonReader Json = new JsonReader(Text);
+//        JsonData data = JsonMapper.ToObject(Text);
+
+//        this.GetComponentInChildren<InputField>().GetComponentInChildren<Text>().text = (string)data["questions"][0]["question"][0]["type"];
 
 
     }

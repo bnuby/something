@@ -17,14 +17,16 @@ public class question{
     public List<string> optionsB = new List<string>();
     public List<answers> answerList = new List<answers>();
 
-    public void addQuestion(string a, string b){
-        optionsA.Add(a);
-        optionsB.Add(b);
-    }
-
-    public void addAnswer(string a, string b){
-        answerList.Add(new answers(a,b));
-    }
+//    public void addOptionA(string a){
+//        optionsA.Add(a);
+//    }
+//    public void addOptionB(string a ){
+//        optionsB.Add(a);
+//    }
+//
+//    public void addAnswer(string a, string b){
+//        answerList.Add(new answers(a,b));
+//    }
 
     public bool[] checkAnswer(List<answers> a){
         bool[] boolean = new bool[a.Count];
@@ -48,8 +50,8 @@ public class question{
 public class answers{
     public string question;
     public string answer;
-    public answers (string question, string answer){
-        this.question = question;
-        this.answer = answer;
-    }
+//    public answers (string question, string answer){
+//        this.question = question;
+//        this.answer = answer;
+//    }
 }
