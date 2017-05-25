@@ -4,15 +4,20 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using System.Xml.Linq;
+using UnityEditor;
+using UnityEditorInternal;
+using System.IO;
 
-public class questionSet{
+
+
+public class questionSet {
     public List<question> questionList = new List<question>();
     void addQuiz(question a){
         questionList.Add(a);
     }
 }
     
-public class question{
+public class question : MonoBehaviour{
     public List<string> optionsA = new List<string>();
     public List<string> optionsB = new List<string>();
     public List<answers> answerList = new List<answers>();
@@ -28,30 +33,33 @@ public class question{
 //        answerList.Add(new answers(a,b));
 //    }
 
-    public bool[] checkAnswer(List<answers> a){
-        bool[] boolean = new bool[a.Count];
+    public bool[] checkAnswer(Dictionary<int, answers> a){
+        bool[] Bool = new bool[a.Count];
 
-        foreach(var i in a){
+        for ( int i = 0 ; i < a.Count ; i++)
+        {
             foreach (var j in answerList)
             {
-                if(i.question == j.question){
-                    boolean[a.IndexOf(i)] = true;
+                if(a[i].question == j.question && a[i].answer == j.answer){
+                    Bool[i] = true;
                     continue;
                 }
-
             }
-
         }
-        return boolean;
 
+       
+        return Bool;
     }
 }
 
 public class answers{
     public string question;
     public string answer;
-//    public answers (string question, string answer){
-//        this.question = question;
-//        this.answer = answer;
-//    }
+    public answers (){
+        
+    }
+    public answers (string question, string answer){
+        this.question = question;
+        this.answer = answer;
+    }
 }

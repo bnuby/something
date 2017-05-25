@@ -3,10 +3,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using LitJson;
+using System.Runtime.InteropServices;
+using System.Collections.Generic;
+using System.Collections;
 
 public class linkModule : MonoBehaviour, IDragHandler ,IEndDragHandler {
 
     private bool isConnected = false;
+    private answers answer;
 
   void Start () {
         boxColliderUpdate();
@@ -71,23 +75,34 @@ public class linkModule : MonoBehaviour, IDragHandler ,IEndDragHandler {
         bool test = false;
         RaycastHit hit = new RaycastHit();
 
+        if (this.isConnected)
+        {
+            this.GetComponentInParent<CanvasLoad>().linkCount -= 1;
+            this.GetComponentInParent<CanvasLoad>().answerList.Remove(this.transform.GetSiblingIndex());
+            this.isConnected = false;
+        }
+        answer = new answers();
+
+//        this.GetComponentInParenΩt<CanvasLoad>().answerList.RemoveAt(this.transform.GetSiblingIndex());
+
         Ray Pos = Camera.main.ScreenPointToRay(Input.mousePosition);
         try{
             Physics.Raycast(Pos, out hit);
+
+            var questionText = this.GetComponentInChildren<Text>().text;
+            var answerText = hit.transform.GetComponentInChildren<Text>().text;
+
             test = hit.transform.tag == "linkModule";
             this.isConnected = true;
             hit.transform.GetComponent<linkModule>().isConnected = true;
             this.GetComponentInParent<CanvasLoad>().linkCount += 1;
+            answer = new answers(questionText,answerText);
+            this.GetComponentInParent<CanvasLoad>().answerList.Add(this.transform.GetSiblingIndex(), answer);
+
         }catch{
             test = false;
-        }
-        if (!test)
-        {
             this.GetComponent<LineRenderer>().SetPosition(1, LineStartLocation() );
-            if (this.isConnected)
-            {
-                this.GetComponentInParent<CanvasLoad>().linkCount -= 1;
-            }
+
         }
 
     }
@@ -99,7 +114,6 @@ public class linkModule : MonoBehaviour, IDragHandler ,IEndDragHandler {
         {
             var DragObjectPosX = this.transform.position.x + this.transform.GetComponent<RectTransform>().rect.width / 2 - 10;
             var DragObjectPosY = this.transform.position.y;
-            var DragObjectPosZ = this.transform.position.z ;
 
             return Camera.main.ScreenToWorldPoint(new Vector3(DragObjectPosX, DragObjectPosY, 10));
 
@@ -109,7 +123,6 @@ public class linkModule : MonoBehaviour, IDragHandler ,IEndDragHandler {
 
             var DragObjectPosX = this.transform.position.x - this.transform.GetComponent<RectTransform>().rect.width / 2 + 10;
             var DragObjectPosY = this.transform.position.y ;
-            var DragObjectPosZ = this.transform.position.z ;
 
             return Camera.main.ScreenToWorldPoint(new Vector3(DragObjectPosX, DragObjectPosY, 10));
         }
@@ -122,7 +135,6 @@ public class linkModule : MonoBehaviour, IDragHandler ,IEndDragHandler {
         {
             var DragObjectPosX = target.transform.position.x + target.transform.GetComponent<RectTransform>().rect.width / 2 - 10;
             var DragObjectPosY = target.transform.position.y;
-            var DragObjectPosZ = target.transform.position.z ;
 
             return Camera.main.ScreenToWorldPoint(new Vector3(DragObjectPosX, DragObjectPosY, 10));
 
@@ -132,7 +144,6 @@ public class linkModule : MonoBehaviour, IDragHandler ,IEndDragHandler {
 
             var DragObjectPosX = target.transform.position.x - target.transform.GetComponent<RectTransform>().rect.width / 2 + 10;
             var DragObjectPosY = target.transform.position.y ;
-            var DragObjectPosZ = target.transform.position.z ;
             return Camera.main.ScreenToWorldPoint(new Vector3(DragObjectPosX, DragObjectPosY, 10));
         }
         return new Vector3(0,0,0);

@@ -51,6 +51,7 @@
      <Compile Include="Assets\Script\EmptyClass.cs" />
      <Compile Include="Assets\Script\Main.cs" />
      <Compile Include="Assets\Script\addButton.cs" />
+     <Compile Include="Assets\Script\checkButton.cs" />
      <Compile Include="Assets\Script\linkImage.cs" />
      <Compile Include="Assets\Script\linkModule.cs" />
      <Compile Include="Assets\Script\questionClass.cs" />
@@ -79,17 +80,17 @@
  <Reference Include="LitJson">
  <HintPath>/Users/Shared/Unity/Nihao/Assets/bin/LitJson.dll</HintPath>
  </Reference>
- <Reference Include="DOTween43">
- <HintPath>/Users/Shared/Unity/Nihao/Assets/bin/DOTween/DOTween43.dll</HintPath>
- </Reference>
- <Reference Include="DOTween50">
- <HintPath>/Users/Shared/Unity/Nihao/Assets/bin/DOTween/DOTween50.dll</HintPath>
- </Reference>
  <Reference Include="DOTween">
  <HintPath>/Users/Shared/Unity/Nihao/Assets/bin/DOTween/DOTween.dll</HintPath>
  </Reference>
+ <Reference Include="DOTween43">
+ <HintPath>/Users/Shared/Unity/Nihao/Assets/bin/DOTween/DOTween43.dll</HintPath>
+ </Reference>
  <Reference Include="DOTween46">
  <HintPath>/Users/Shared/Unity/Nihao/Assets/bin/DOTween/DOTween46.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTween50">
+ <HintPath>/Users/Shared/Unity/Nihao/Assets/bin/DOTween/DOTween50.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
