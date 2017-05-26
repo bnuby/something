@@ -38,9 +38,10 @@ public class linkModule : MonoBehaviour, IDragHandler ,IEndDragHandler {
     public void OnDrag(PointerEventData eventData)
     {
         Vector3 Pos = LineStartLocation();
+        Pos.z = 20;
         RaycastHit hit = new RaycastHit();
         Vector3 Pos2 = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Pos2.z = 10;
+        Pos2.z = 20;
         bool test = false;
         Physics.Raycast(Pos, Pos);
         this.GetComponent<LineRenderer>().SetPosition(0, Pos);
@@ -54,7 +55,9 @@ public class linkModule : MonoBehaviour, IDragHandler ,IEndDragHandler {
         }
 
         if ( test && hit.transform.tag == "linkModule" ) {
-            this.GetComponent<LineRenderer>().SetPosition(1, LineEndLocation(hit) );
+            var getEndPos = LineEndLocation(hit);
+            getEndPos.z = 20;
+            this.GetComponent<LineRenderer>().SetPosition(1,  getEndPos);
         }
         else
         {

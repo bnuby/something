@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System;
 using System.Security.Cryptography;
 using UnityEditor;
+using System.Runtime.InteropServices;
 
 
 public class CanvasLoad : MonoBehaviour {
@@ -41,6 +42,24 @@ public class CanvasLoad : MonoBehaviour {
         
 
     void constructQuiz(){
+        var currentResolution = UnityStats.screenRes.Split('x');
+        print(UnityStats.screenRes);
+        var HeightMargin = float.Parse(currentResolution[0])  / 10;
+        var WidthMargin = float.Parse(currentResolution[0]) / 10 + float.Parse(currentResolution[1]) / 10 ;
+
+        QuestionParent.position = new Vector3(WidthMargin, float.Parse(currentResolution[1]) - HeightMargin, 10);
+        AnswerParent.transform.position = new Vector3(float.Parse(currentResolution[0]) - WidthMargin, float.Parse(currentResolution[1]) - HeightMargin, 10);
+
+        var SpacingA = (float.Parse(currentResolution[1]) - 2 * HeightMargin - quiz.optionsB.Count * QuestionParent.GetComponent<GridLayoutGroup>().cellSize.y - 25 ) / (quiz.optionsA.Count - 1)  ;
+        var SpacingB = (float.Parse(currentResolution[1]) - 2 * HeightMargin - quiz.optionsB.Count * AnswerParent.GetComponent<GridLayoutGroup>().cellSize.y - 25 ) / (quiz.optionsB.Count - 1) ;
+        QuestionParent.GetComponent<GridLayoutGroup>().spacing = new Vector2(0, SpacingA);
+        AnswerParent.GetComponent<GridLayoutGroup>().spacing = new Vector2(0, SpacingB);
+
+
+//        var actualHeight = currentResolution - topMargin - botMargin;
+//        var eachHeightSpacingA = actualHeight / quiz.optionsA.Count;
+//        var eachHeightSpacingB= actualHeight / quiz.optionsB.Count;
+
         foreach (string e in quiz.optionsA)
         {
             var a = Instantiate(QuestionTarget);
@@ -89,16 +108,13 @@ public class CanvasLoad : MonoBehaviour {
             if (checkList[i])
             {
                 currentTarget.transform.GetComponent<LineRenderer>().startColor = green;
-                currentTarget.transform.GetComponent<LineRenderer>().endColor = green;
-
+                currentTarget.transform.GetComponent<LineRenderer>().endColor = green;               
             }
             else
             {                    
                 bool find = false;
                 currentTarget.transform.GetComponent<LineRenderer>().startColor = red;
                 currentTarget.transform.GetComponent<LineRenderer>().endColor = red;
-
-//                currentTarget.transform.GetComponent<LineRenderer>().SetPosition(0, LineStartLocation(currentTarget));
                 for (int j = 0; j < AnswerParent.childCount; j++)
                 {
                     if (AnswerParent.GetChild(j).GetComponentInChildren<Text>().text == quiz.answerList[i].answer && QuestionParent.GetChild(j).GetComponentInChildren<Text>().text == quiz.answerList[i].question)
@@ -106,10 +122,8 @@ public class CanvasLoad : MonoBehaviour {
                         find = true;
                         var destinationTarget = AnswerParent.GetChild(j);
                         var numOfPos = currentTarget.transform.GetComponent<LineRenderer>().numPositions += 2;
-
                         currentTarget.transform.GetComponent<LineRenderer>().SetPosition(numOfPos-2, LineStartLocation(currentTarget));
                         currentTarget.transform.GetComponent<LineRenderer>().SetPosition(numOfPos-1, LineStartLocation(destinationTarget));
-
                     }
                 }
                 if (find == false)
@@ -118,9 +132,6 @@ public class CanvasLoad : MonoBehaviour {
                 }
             }
         }
-
-//        print(answerList[0].answer);
-//        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     void Next(){

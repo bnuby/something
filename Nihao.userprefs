@@ -2,12 +2,12 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/linkModule.cs">
     <Files>
+      <File FileName="Assets/Script/addButton.cs" Line="11" Column="17" />
       <File FileName="Assets/Script/CameraScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Script/CanvasLoad.cs" Line="122" Column="16" />
-      <File FileName="Assets/Script/addButton.cs" Line="17" Column="44" />
-      <File FileName="Assets/Script/linkModule.cs" Line="103" Column="25" />
-      <File FileName="Assets/Script/Main.cs" Line="11" Column="1" />
-      <File FileName="Assets/Script/questionClass.cs" Line="29" Column="13" />
+      <File FileName="Assets/Script/CanvasLoad.cs" Line="54" Column="191" />
+      <File FileName="Assets/Script/linkModule.cs" Line="94" Column="13" />
+      <File FileName="Assets/Script/Main.cs" Line="1" Column="1" />
+      <File FileName="Assets/Script/questionClass.cs" Line="1" Column="1" />
       <File FileName="Assets/Script/linkImage.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>

@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Nihao.unity
+- path: Assets/Scene/AddQuestion_ConnectQuiz.unity
   isLoaded: 1
   isActive: 1
